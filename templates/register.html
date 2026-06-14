@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | ICT & AI Bootcamp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/register.css') }}">
+</head>
+<body>
+    <div class="page-shell">
+        <nav id="navbar">
+            <div class="nav-brand">ICT & AI Bootcamp</div>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/">Programs</a>
+                <a href="/">About</a>
+            </div>
+        </nav>
+
+        <main class="register-page">
+            <section class="register-hero">
+                <div class="register-copy">
+                    <span class="eyebrow">Enrollment Phase 01</span>
+                    <h1>Secure Your Spot in the Future</h1>
+                    <p>Join a network of innovators and master the technologies defining the next decade.</p>
+
+                    <div class="register-card">
+                        <form class="register-form" method="post" action="/register">
+                            <div class="input-group">
+                                <label class="form-label" for="full-name">Full Name</label>
+                                <input id="full-name" name="full_name" type="text" class="form-input" placeholder="Enter your full name" required>
+                            </div>
+
+                            <div class="input-group">
+                                <label class="form-label" for="email">Email Address</label>
+                                <input id="email" name="email" type="email" class="form-input" placeholder="name@example.com" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary register-btn">Register →</button>
+                        </form>
+
+                        <p class="form-note">
+                            A registration number will be automatically assigned to you upon submission. This unique ID will serve as your digital credentials throughout the bootcamp.
+                        </p>
+                    </div>
+                </div>
+
+                <aside class="register-panel">
+                    <div class="register-summary">
+                        <span class="section-tag">Bootcamp Registration</span>
+                        <h2>Fast signup for the next ICT & AI cohort</h2>
+                        <p>Complete your enrollment and get started with expert-led labs, guided projects, and community support.</p>
+                    </div>
+
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <strong>500+</strong>
+                            <span>Active Scholars</span>
+                        </div>
+                        <div class="stat-item">
+                            <strong>98%</strong>
+                            <span>Success Rate</span>
+                        </div>
+                        <div class="stat-item">
+                            <strong>24/7</strong>
+                            <span>Lab Access</span>
+                        </div>
+                    </div>
+                </aside>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

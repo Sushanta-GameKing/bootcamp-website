@@ -12,5 +12,8 @@ def homePage():
 def candidates():
     return render_template("candidates.html",candidates = db.get_all_candidates())
 
+@app.route("/register",methods = ['GET','POST'])
+def register():
+    return render_template("register.html")
 if ( __name__ == "__main__"):
     app.run(debug=False)
