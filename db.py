@@ -9,12 +9,13 @@ def create_table():
     conn,cursor = connect_db()
 
     cursor.execute('''
-        create tabe if not exists candidates(
+        create table if not exists candidates(
             candidate_id integer primary key,
             candidate_name string,
             candidate_email string,
             candidate_point integer
-            )''')
+            );
+        ''')
     conn.commit()
     conn.close()
 
@@ -64,3 +65,6 @@ def get_candidate_points(sort = -1):
     conn.close()
 
     return candidates
+
+def init_db():
+    create_table()
