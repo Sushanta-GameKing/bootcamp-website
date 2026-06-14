@@ -157,23 +157,35 @@ a {
 
 .register-hero {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 2rem;
-  align-items: start;
+  justify-items: center;
+  padding: 3rem 0 0;
   min-height: calc(100vh - 8rem);
 }
 
 .register-copy {
-  max-width: 560px;
+  width: 100%;
+  max-width: 640px;
 }
 
 .register-card {
-  margin-top: 2rem;
+  margin: 2rem auto 0;
   padding: 2.2rem;
+  width: min(100%, 520px);
   border-radius: 2rem;
   background: rgba(14, 28, 47, 0.95);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 22px 60px rgba(0, 0, 0, 0.22);
+}
+
+.register-message {
+  margin-top: 1.4rem;
+  padding: 1rem 1.25rem;
+  border-radius: 1.25rem;
+  background: rgba(47, 217, 244, 0.12);
+  border: 1px solid rgba(47, 217, 244, 0.24);
+  color: var(--surface-tint);
+  font-weight: 600;
+  text-align: center;
 }
 
 .register-form {
