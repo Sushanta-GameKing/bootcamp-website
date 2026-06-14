@@ -32,7 +32,7 @@ def add_candidate(candidate_id,candidate_name,candidate_email,candidate_point = 
     conn,cursor = connect_db()
     
     cursor.execute('''
-        insert into candidates (candidate_id,candidate_name,candidate_email,candidate_point) values(?,?,?)
+        insert into candidates (candidate_id,candidate_name,candidate_email,candidate_point) values(?,?,?,?)
     ''',(candidate_id,candidate_name,candidate_email,candidate_point))
     
     conn.commit()
@@ -40,7 +40,7 @@ def add_candidate(candidate_id,candidate_name,candidate_email,candidate_point = 
 
 def get_candidate_by_id(candidate_id):
     conn, cursor = connect_db()
-    cursor.execute('SELECT * FROM candidates WHERE candidate_id = ?', (candidate_id,))
+    cursor.execute('SELECT * FROM candidates WHERE candidate_id = ?', (candidate_id))
 
     candidate = cursor.fetchone()
     

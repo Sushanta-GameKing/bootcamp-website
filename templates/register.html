@@ -43,34 +43,15 @@
                             <button type="submit" class="btn btn-primary register-btn">Register →</button>
                         </form>
 
+                        {% if register_message %}
+                        <div class="register-message">{{ register_message }}</div>
+                        {% endif %}
+
                         <p class="form-note">
                             A registration number will be automatically assigned to you upon submission. This unique ID will serve as your digital credentials throughout the bootcamp.
                         </p>
                     </div>
                 </div>
-
-                <aside class="register-panel">
-                    <div class="register-summary">
-                        <span class="section-tag">Bootcamp Registration</span>
-                        <h2>Fast signup for the next ICT & AI cohort</h2>
-                        <p>Complete your enrollment and get started with expert-led labs, guided projects, and community support.</p>
-                    </div>
-
-                    <div class="stats-row">
-                        <div class="stat-item">
-                            <strong>500+</strong>
-                            <span>Active Scholars</span>
-                        </div>
-                        <div class="stat-item">
-                            <strong>98%</strong>
-                            <span>Success Rate</span>
-                        </div>
-                        <div class="stat-item">
-                            <strong>24/7</strong>
-                            <span>Lab Access</span>
-                        </div>
-                    </div>
-                </aside>
             </section>
         </main>
     </div>
