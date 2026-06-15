@@ -34,15 +34,10 @@
                 <div class="stats-bar">
                     <div class="summary-card">
                         <span>Total Candidates</span>
-                        <strong>{{ candidates|length if candidates else 0 }}</strong>
+                        <strong>{{ approved_count }}</strong>
                     </div>
                     <div class="summary-card">
                         <span>Average Score</span>
-                        {% set total_points = 0 %}
-                        {% for candidate in candidates %}
-                            {% set total_points = total_points + candidate[3] %}
-                        {% endfor %}
-                        {% set avg_score = (total_points / candidates|length)|round(0, 'common') if candidates else 0 %}
                         <strong>{{ avg_score }}</strong>
                     </div>
                 </div>
@@ -74,11 +69,11 @@
                                     <td>{{ candidate[3] }}</td>
                                 </tr>
                                 {% endfor %}
-                                {% else %}
+                            {% else %}
                                 <tr>
                                     <td colspan="4" style="text-align:center; color: var(--text-muted);">No candidates available yet.</td>
                                 </tr>
-                                {% endif %}
+                            {% endif %}
                             </tbody>
                         </table>
                     </div>
