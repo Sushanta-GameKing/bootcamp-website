@@ -13,9 +13,9 @@ def admin_login():
         if username == "admin" and password == "admin123":
             return redirect("/admin/dashboard")
         else:
-            return render_template("admin.html", admin_message="Invalid credentials. Please try again.")
+            return render_template("admin/admin.html", admin_message="Invalid credentials. Please try again.")
 
-    return render_template("admin.html")
+    return render_template("admin/admin.html")
 
 @admin_bp.route("/admin/dashboard")
 def admin_dashboard():
@@ -25,7 +25,7 @@ def admin_dashboard():
     total_candidates = len(candidates)
     avg_score = round(sum(candidate[3] for candidate in candidates) / total_candidates, 1) if total_candidates else 0
     return render_template(
-        "admin_home.html",
+        "admin/admin_home.html",
         candidates=candidates,
         approved_count=len(approved_candidates),
         pending_count=len(pending_candidates),
@@ -41,7 +41,7 @@ def approve_candidates():
     total_candidates = len(candidates)
     avg_score = round(sum(candidate[3] for candidate in candidates) / total_candidates, 1) if total_candidates else 0
     return render_template(
-        "admin_approve.html",
+        "admin/admin_approve.html",
         pending_candidates=pending_candidates,
         avg_score=avg_score,
         total_candidates=total_candidates,
@@ -56,7 +56,7 @@ def manage_point():
     total_candidates = len(candidates)
     avg_score = round(sum(candidate[3] for candidate in candidates) / total_candidates, 1) if total_candidates else 0
     return render_template(
-        "admin_managepoint.html",
+        "admin/admin_managepoint.html",
         approved_candidates=approved_candidates,
         avg_score=avg_score,
         total_candidates=total_candidates,
