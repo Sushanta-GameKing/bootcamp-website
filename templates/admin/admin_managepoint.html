@@ -86,4 +86,48 @@
         </main>
     </div>
 </body>
+<script>
+    document.querySelectorAll(".point-group").forEach(group => {
+        const minusBtn = group.querySelector(".outline-red");
+        const plusBtn = group.querySelector(".outline-btn");
+        const input = group.querySelector(".point-input");
+        const candidateId = group.closest("tr").querySelector("td").textContent.split('-')[1];
+
+        minusBtn.addEventListener('click', () => {
+            const points = parseInt(input.value);
+            if (points > 1) {
+                updatePoints(candidateId, -points);
+                input.value = 1;
+            }
+        });
+
+        plusBtn.addEventListener('click', () => {
+            const points = parseInt(input.value);
+            updatePoints(candidateId, points);
+            input.value = 1;
+        });
+    });
+
+    function updatePoints(candidateId, points) {
+        fetch(`/managepoint`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ candidate_id: candidateId, points: points })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert('Failed to update points. Please try again.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while updating points.');
+        });
+    }
+</script>
 </html>

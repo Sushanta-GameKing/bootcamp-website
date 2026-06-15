@@ -67,5 +67,13 @@ def get_candidate_points(sort = -1):
 
     return candidates
 
+def approve_candidate(candidateID):
+    conn,cursor = connect_db()
+
+    cursor.execute("update candidates set approved = 1 where candidate_id = (?)", (candidateID,))
+    
+    conn.commit()
+    conn.close()
+
 def init_db():
     create_table()
