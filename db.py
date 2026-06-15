@@ -13,7 +13,8 @@ def create_table():
             candidate_id integer primary key,
             candidate_name string,
             candidate_email string,
-            candidate_point integer
+            candidate_point integer,
+            approved integer
             );
         ''')
     conn.commit()
@@ -32,7 +33,7 @@ def add_candidate(candidate_id,candidate_name,candidate_email,candidate_point = 
     conn,cursor = connect_db()
     
     cursor.execute('''
-        insert into candidates (candidate_id,candidate_name,candidate_email,candidate_point) values(?,?,?,?)
+        insert into candidates (candidate_id,candidate_name,candidate_email,candidate_point,approved) values(?,?,?,?,?)
     ''',(candidate_id,candidate_name,candidate_email,candidate_point))
     
     conn.commit()

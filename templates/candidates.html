@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidates | ICT & AI Bootcamp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/candidates.css') }}">
+</head>
+<body>
+    <div class="page-shell candidates-page">
+        <nav id="navbar">
+            <div class="nav-brand">ICT & AI Bootcamp</div>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/">Programs</a>
+                <a href="/">About</a>
+                <a href="/candidates" class="active-link">Candidates</a>
+                <a href="/register" class="nav-cta">Apply Now</a>
+            </div>
+        </nav>
+
+        <main>
+            <section class="candidates-hero">
+                <div class="hero-copy">
+                    <span class="eyebrow">Live leaderboard</span>
+                    <h1>Top Tech Talents</h1>
+                    <p>Discover the latest candidate standings and performance metrics from our ICT & AI bootcamp cohort.</p>
+                </div>
+
+                <div class="stats-bar">
+                    <div class="summary-card">
+                        <span>Total Candidates</span>
+                        <strong>{{ candidates|length if candidates else 0 }}</strong>
+                    </div>
+                    <div class="summary-card">
+                        <span>Average Score</span>
+                        {% set total_points = 0 %}
+                        {% for candidate in candidates %}
+                            {% set total_points = total_points + candidate[3] %}
+                        {% endfor %}
+                        {% set avg_score = (total_points / candidates|length)|round(0, 'common') if candidates else 0 %}
+                        <strong>{{ avg_score }}</strong>
+                    </div>
+                </div>
+            </section>
+
+            <section class="candidates-table-section">
+                <div class="table-card">
+                    <div class="table-header">
+                        <div>
+                            <h2>Candidate Rankings</h2>
+                            <p>All candidates are shown in one list with their current score and batch information.</p>
+                        </div>
+                    </div>
+                    <div class="table-wrap">
+                        <table class="candidate-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Points</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if candidates %}
+                                {% for candidate in candidates %}
+                                <tr>
+                                    <td>{{ candidate[0] }}</td>
+                                    <td>{{ candidate[1] }}</td>
+                                    <td>{{ candidate[3] }}</td>
+                                </tr>
+                                {% endfor %}
+                                {% else %}
+                                <tr>
+                                    <td colspan="4" style="text-align:center; color: var(--text-muted);">No candidates available yet.</td>
+                                </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p class="footer-note">© 2026 ICT & AI Bootcamp. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
