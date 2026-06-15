@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | ICT & AI Bootcamp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/admin_dashboard.css') }}">
+</head>
+<body>
+    <div class="dashboard-shell">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span class="brand-mark">ICT & AI Bootcamp</span>
+                <p>Admin Portal</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="/admin/dashboard" class="sidebar-link {% if active_page == 'home' %}active{% endif %}">Home</a>
+                <a href="/approve" class="sidebar-link {% if active_page == 'approve' %}active{% endif %}">Approve Candidates</a>
+                <a href="/managepoint" class="sidebar-link {% if active_page == 'managepoint' %}active{% endif %}">Manage Points</a>
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <div>
+                    <p class="header-label">Admin Management</p>
+                    {% if active_page == 'approve' %}
+                        <h1>Approving Candidates</h1>
+                        <p>Review and approve new applicants from the bootcamp candidate pool.</p>
+                    {% elif active_page == 'managepoint' %}
+                        <h1>Managing Points</h1>
+                        <p>Allocate point adjustments and update candidate scores directly from the dashboard.</p>
+                    {% else %}
+                        <h1>Managing Candidates</h1>
+                        <p>Oversee enrollment status, approve new applicants, and adjust candidate points from one central dashboard.</p>
+                    {% endif %}
+                </div>
+            </header>
+
+            <section class="metric-grid">
+                <article class="metric-card">
+                    <span>Total Candidates</span>
+                    <strong>{{ candidates|length if candidates else 0 }}</strong>
+                </article>
+                <article class="metric-card">
+                    <span>Active Now</span>
+                    <strong>{{ active_count if active_count is defined else (candidates|length if candidates else 0) }}</strong>
+                </article>
+                <article class="metric-card highlight-card">
+                    <span>Avg. Score</span>
+                    <strong>{{ avg_score }}</strong>
+                </article>
+                <article class="metric-card">
+                    <span>Pending Review</span>
+                    <strong>{{ pending_count }}</strong>
+                </article>
+            </section>
+
+            <section class="dashboard-grid">
+                <article class="panel panel-table">
+                    <div class="panel-header panel-header-row">
+                        <div>
+                            {% if active_page == 'home' %}
+                                <h2>All Candidates</h2>
+                                <span>View and edit every candidate record in the bootcamp roster.</span>
+                            {% elif active_page == 'approve' %}
+                                <h2>Approve Candidates</h2>
+                                <span>Review pending applications and approve candidates from the list below.</span>
+                            {% else %}
+                                <h2>Manage Points</h2>
+                                <span>Adjust points for approved candidates using the controls provided.</span>
+                            {% endif %}
+                        </div>
+                        <div class="search-box">
+                            <input type="search" placeholder="Search by name or ID…">
+                        </div>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table class="dashboard-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th>Points</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if active_page == 'home' %}
+                                    {% set table_candidates = candidates %}
+                                {% elif active_page == 'approve' %}
+                                    {% set table_candidates = pending_candidates %}
+                                {% else %}
+                                    {% set table_candidates = approved_candidates %}
+                                {% endif %}
+
+                                {% if table_candidates %}
+                                    {% for candidate in table_candidates %}
+                                    <tr>
+                                        <td>#CAN-{{ '%04d'|format(candidate[0]) }}</td>
+                                        <td>{{ candidate[1] }}</td>
+                                        <td>{{ candidate[2] }}</td>
+                                        <td>
+                                            {% if candidate[4] == 1 %}
+                                                <span class="status-pill approved">Approved</span>
+                                            {% else %}
+                                                <span class="status-pill pending">Pending</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ candidate[3] }}</td>
+                                        <td>
+                                            <div class="action-group">
+                                                <button class="btn small-btn">Edit</button>
+                                                {% if active_page == 'approve' %}
+                                                    <button class="btn approve-btn">Approve</button>
+                                                {% elif active_page == 'managepoint' %}
+                                                    <button class="btn outline-red">-</button>
+                                                    <input type="number" class="point-input" value="1" min="1">
+                                                    <button class="btn outline-btn">+</button>
+                                                {% endif %}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                {% else %}
+                                <tr>
+                                    <td colspan="6" class="empty-state">No candidate records found.</td>
+                                </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

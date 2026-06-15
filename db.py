@@ -29,12 +29,12 @@ def get_all_candidates():
     conn.close()
     return candidates
 
-def add_candidate(candidate_id,candidate_name,candidate_email,candidate_point = 0):
+def add_candidate(candidate_id,candidate_name,candidate_email,candidate_point = 0, approved = 0):
     conn,cursor = connect_db()
     
     cursor.execute('''
         insert into candidates (candidate_id,candidate_name,candidate_email,candidate_point,approved) values(?,?,?,?,?)
-    ''',(candidate_id,candidate_name,candidate_email,candidate_point))
+    ''',(candidate_id,candidate_name,candidate_email,candidate_point,approved))
     
     conn.commit()
     conn.close()

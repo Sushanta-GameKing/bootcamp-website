@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Points | ICT & AI Bootcamp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/admin_dashboard.css') }}">
+</head>
+<body>
+    <div class="dashboard-shell">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span class="brand-mark">ICT & AI Bootcamp</span>
+                <p>Admin Portal</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="/admin/dashboard" class="sidebar-link">Home</a>
+                <a href="/approve" class="sidebar-link">Approve Candidates</a>
+                <a href="/managepoint" class="sidebar-link active">Manage Points</a>
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <div>
+                    <p class="header-label">Admin Management</p>
+                    <h1>Manage Points</h1>
+                    <p>Adjust points for approved candidates using the controls below.</p>
+                </div>
+            </header>
+
+            <section class="dashboard-grid">
+                <article class="panel panel-table full-width">
+                    <div class="panel-header panel-header-row">
+                        <div>
+                            <h2>Approved Candidates</h2>
+                            <span>Increase or decrease points for approved bootcamp candidates.</span>
+                        </div>
+                        <div class="search-box">
+                            <input type="search" placeholder="Search by name or ID…">
+                        </div>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table class="dashboard-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Points</th>
+                                    <th>Adjust</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if approved_candidates %}
+                                    {% for candidate in approved_candidates %}
+                                    <tr>
+                                        <td>#CAN-{{ '%04d'|format(candidate[0]) }}</td>
+                                        <td>{{ candidate[1] }}</td>
+                                        <td>{{ candidate[2] }}</td>
+                                        <td>{{ candidate[3] }}</td>
+                                        <td>
+                                            <div class="action-group point-group">
+                                                <button class="btn outline-red">-</button>
+                                                <input type="number" class="point-input" value="1" min="1">
+                                                <button class="btn outline-btn">+</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                {% else %}
+                                <tr>
+                                    <td colspan="5" class="empty-state">No approved candidates available.</td>
+                                </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

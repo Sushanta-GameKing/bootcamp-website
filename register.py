@@ -11,7 +11,7 @@ def register():
         candidate_email = request.form.get("email")
 
         if candidate_name and candidate_email:
-            db.add_candidate(None, candidate_name, candidate_email)
+            db.add_candidate(None, candidate_name, candidate_email, 0)
             return render_template("register.html", register_message="Candidate registered successfully!")
         else:
             return render_template("register.html", register_message="All fields are required.")

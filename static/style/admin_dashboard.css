@@ -1,0 +1,357 @@
+:root {
+  --surface: #051424;
+  --surface-container: #122131;
+  --surface-soft: #0d1c2d;
+  --surface-tint: #2fd9f4;
+  --primary: #8aebff;
+  --primary-container: #22d3ee;
+  --on-primary: #00363e;
+  --text-primary: #d4e4fa;
+  --text-secondary: rgba(212, 228, 250, 0.75);
+  --text-muted: #8c9cb7;
+  --border: rgba(255, 255, 255, 0.08);
+  --panel: rgba(14, 28, 47, 0.96);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
+  background: radial-gradient(circle at top left, rgba(47, 217, 244, 0.12), transparent 18%),
+              radial-gradient(circle at 92% 12%, rgba(138, 235, 255, 0.08), transparent 18%),
+              linear-gradient(180deg, var(--surface) 0%, #071729 100%);
+}
+
+.dashboard-shell {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 2rem;
+  min-height: 100vh;
+  padding: 1.5rem;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1.5rem;
+  border-radius: 1.75rem;
+  background: rgba(5, 20, 36, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.22);
+}
+
+.sidebar-brand {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.brand-mark {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.sidebar-brand p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.sidebar-nav {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.sidebar-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.95rem 1rem;
+  border-radius: 1rem;
+  color: var(--text-primary);
+  background: rgba(47, 217, 244, 0.08);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.sidebar-link.active {
+  background: linear-gradient(135deg, rgba(47, 217, 244, 0.18), rgba(138, 235, 255, 0.12));
+  border: 1px solid rgba(47, 217, 244, 0.25);
+}
+
+.dashboard-main {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.header-label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(2.5rem, 3vw, 3.5rem);
+}
+
+.dashboard-header p {
+  max-width: 60ch;
+  color: var(--text-secondary);
+  margin-top: 0.9rem;
+}
+
+.header-cta {
+  align-self: center;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.metric-card,
+.panel {
+  padding: 1.5rem;
+  border-radius: 1.75rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+}
+
+.metric-card {
+  min-height: 120px;
+}
+
+.metric-card span {
+  display: block;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.metric-card strong {
+  display: block;
+  font-size: 2rem;
+}
+
+.highlight-card {
+  border-color: rgba(47, 217, 244, 0.45);
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.panel.full-width {
+  width: 100%;
+  max-width: 100%;
+}
+
+.panel-header {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.panel-header-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.panel-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.panel-header span {
+  color: var(--text-secondary);
+}
+
+.approval-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.approval-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 1.2rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.item-name {
+  margin: 0;
+  font-weight: 700;
+}
+
+.item-meta {
+  margin: 0.35rem 0 0;
+  color: var(--text-muted);
+}
+
+.item-actions {
+  display: flex;
+  gap: 0.65rem;
+}
+
+.approve-btn,
+.secondary-btn,
+.small-btn,
+.outline-btn,
+.outline-red {
+  border: none;
+  border-radius: 0.9rem;
+  padding: 0.7rem 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.approve-btn {
+  color: var(--on-primary);
+  background: linear-gradient(135deg, var(--primary-container), var(--primary));
+}
+
+.secondary-btn {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+}
+
+.dashboard-table th,
+.dashboard-table td {
+  padding: 1rem 1.1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.dashboard-table th {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.dashboard-table td {
+  color: var(--text-primary);
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.status-pill.approved {
+  background: rgba(47, 217, 244, 0.12);
+  color: var(--surface-tint);
+}
+
+.status-pill.pending {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-secondary);
+}
+
+.action-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.small-btn {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.outline-btn {
+  color: var(--surface-tint);
+  background: rgba(47, 217, 244, 0.08);
+}
+
+.outline-red {
+  color: #ff7a7a;
+  background: rgba(255, 122, 122, 0.1);
+}
+
+.empty-state {
+  color: var(--text-secondary);
+  padding: 1.5rem;
+}
+
+.search-box input {
+  width: 100%;
+  min-height: 3rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0 1rem;
+  background: rgba(255,255,255,0.05);
+  color: var(--text-primary);
+}
+
+.search-box input::placeholder {
+  color: rgba(212, 228, 250, 0.55);
+}
+
+@media (max-width: 1024px) {
+  .dashboard-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .metric-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .metric-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
